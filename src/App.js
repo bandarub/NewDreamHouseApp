@@ -1,26 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link, Switch,withRouter } from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Home from './pages/Home';
+import Properties from './pages/Properties';
+import Brokers from './pages/Brokers';
+import Favorites from './pages/Favorites';
+
+import CoreLayout from './shared/layouts/CoreLayout';
+
+import { routerPath, pageTitle } from './constants';
+
+
+
+class App extends Component {
+	render() {
+		return (
+			<div>
+				<Router>
+					<CoreLayout>
+						<Switch>
+							<Route exact component={() => <Home title={pageTitle.home} />} path="/" />
+							<Route exact component={() => <Home title={pageTitle.home} />} path="/home" />
+							<Route
+								exact
+								component={() => <Properties title={pageTitle.properties} />}
+								path={routerPath.properties}
+							/>
+							<Route
+								exact
+								component={() => <Brokers title={pageTitle.brokers} />}
+								path={routerPath.brokers}
+							/>
+							<Route
+								exact
+								component={() => <Favorites title={pageTitle.favorites} />}
+								path={routerPath.favorites}
+							/>
+						</Switch>
+					</CoreLayout>
+				</Router>
+			</div>
+		);
+	}
 }
 
 export default App;
